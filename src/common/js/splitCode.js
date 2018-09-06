@@ -14,7 +14,7 @@ export function urlParse () {
   let arr = url.match(reg);
   if (arr) {
     arr.forEach((item) => {
-      let tempArr = item.subString(1).split('=');
+      let tempArr = item.substr(1).split('=');
       let key = decodeURIComponent(tempArr[0]);
       let val = decodeURIComponent(tempArr[1]);
       obj[key] = val;

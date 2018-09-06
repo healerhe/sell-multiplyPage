@@ -234,6 +234,41 @@
           window.alert( `支付${this.totalPrice}元`);
           window.location.href = 'http://localhost:8080/pay.html?orderId=' + 1 + '&openid=' + 2;
         }
+      },
+      add_data(food) {
+        var requestadd = this.db.transaction(['shopCart'], 'readwrite')
+          .objectStore('shopCart')
+          .add({ food: food });
+
+        requestadd.onsuccess = function (event) {
+          console.log('数据写入成功');
+        };
+
+        requestadd.onerror = function (event) {
+          console.log('数据写入失败');
+        };
+      },
+      update_data(food) {
+        // put()方法自动更新了主键为1的记录。
+        var request = this.db.transaction(['shopCart'], 'readwrite')
+          .objectStore('shopCart')
+          .put({food: food});
+
+        request.onsuccess = function (event) {
+          console.log('数据更新成功');
+        };
+
+        request.onerror = function (event) {
+          console.log('数据更新失败');
+        };
+      },
+      delete_data(name) {
+        var request = this.db.transaction(['person'], 'readwrite')
+          .objectStore('person')
+          .delete(name);
+        request.onsuccess = function (event) {
+          console.log('数据删除成功');
+        };
       }
     },
     components: {
